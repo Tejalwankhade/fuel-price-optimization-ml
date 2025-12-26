@@ -145,7 +145,7 @@ Streamlit
 Pickle
 Google Colab
 
-Author
+👤Author
 
 Tejal Wankhade
 
