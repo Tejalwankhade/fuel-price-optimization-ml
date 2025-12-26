@@ -23,52 +23,38 @@ Profit = (Price − Cost) × Predicted Volume
 Retail fuel demand depends on:
 
 ✔️ company price
-
 ✔️ competitor price movements
-
 ✔️ daily cost changes
-
 ✔️ historical demand trends
 
 Since price can only be changed once per day, a data-driven strategy is required to recommend the optimal daily price.
 
-🧠 3. Approach & Methodology
-🧩 3.1 Data Pipeline
+ 3. Approach & Methodology
+ 3.1 Data Pipeline
 
 The following pipeline was implemented:
 
-📥 Data ingestion from historical CSV
-
-🧹 Data cleaning & validation
-
-🔎 Outlier detection
+ Data ingestion from historical CSV
+ Data cleaning & validation
+ Outlier detection
 
 🏗 Feature engineering including:
 
 margin per liter
-
 competitor average price
-
 price differential
-
 lag features (previous volume, price)
-
 moving-average indicators
-
 Processed dataset was persisted for reproducible training.
 
 🤖 3.2 Machine Learning Model
 
 Algorithm used: Random Forest Regression
-
 Target variable: daily fuel volume
 
 Why Random Forest?
-
 handles nonlinear relationships
-
 robust to noise/outliers
-
 performs well with tabular business data
 
 💹 3.3 Price Optimization Strategy
@@ -83,13 +69,10 @@ return price with maximum profit
 
 Business Constraints Applied:
 
-⛔ maximum price change per day
-
-💸 price ≥ cost (no negative margin)
-
-⚖️ competitive alignment (price not far above competitors)
-
-✔️ eliminate economically infeasible price points
+maximum price change per day
+price ≥ cost (no negative margin)
+competitive alignment (price not far above competitors)
+eliminate economically infeasible price points
 
 🗂️ 4. Dataset Description
 
@@ -165,5 +148,5 @@ Google Colab
 Author
 
 Tejal Wankhade
-AI & Machine Learning Practitioner
+
 
