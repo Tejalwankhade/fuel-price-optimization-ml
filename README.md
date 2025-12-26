@@ -1,207 +1,169 @@
 # fuel-price-optimization-ml
-Fuel Price Optimization – Machine Learning Project
+⛽ Fuel Price Optimization – Machine Learning Project
 
-Author: Tejal Wankhade
-Live Demo: https://fuel-price-optimization-ml-qse9txe2exsvy2a6v4knxu.streamlit.app/
+👤 Author: Tejal Wankhade
+🌐 Live Demo: https://fuel-price-optimization-ml-qse9txe2exsvy2a6v4knxu.streamlit.app/
 
-1. Project Overview
+📌 1. Project Overview
 
-This project implements an end-to-end machine learning system to optimize daily retail fuel pricing.
-The objective is to recommend a price that:
+This repository contains an end-to-end Machine Learning solution for optimizing daily retail fuel price.
+The goal is to recommend a price that:
 
-maximizes daily profit
+ maximizes daily profit
+ remains competitively aligned
+ respects business pricing constraints
 
-remains competitive in the market
+The solution predicts expected sales volume at different price levels and selects the price that provides highest profit.
 
-complies with practical pricing constraints
-
-The model predicts expected sales volume for different price points and selects the price that yields the highest profit.
-
-Profit is defined as:
-
+Profit Formula:
 Profit = (Price − Cost) × Predicted Volume
 
-The solution includes:
+🎯 2. Problem Statement
 
-data ingestion and preprocessing pipeline
+Retail fuel demand depends on:
 
-feature engineering
+✔️ company price
 
-demand prediction model
+✔️ competitor price movements
 
-price optimization logic
+✔️ daily cost changes
 
-Streamlit web application
+✔️ historical demand trends
 
-trained model artifact (pickle)
+Since price can only be changed once per day, a data-driven strategy is required to recommend the optimal daily price.
 
-2. Problem Statement
+🧠 3. Approach & Methodology
+🧩 3.1 Data Pipeline
 
-Retail fuel demand depends on multiple factors:
+The following pipeline was implemented:
 
-company price
+📥 Data ingestion from historical CSV
 
-competitor prices
+🧹 Data cleaning & validation
 
-cost fluctuations
+🔎 Outlier detection
 
-historical sales trends
-
-Price can be updated once per day.
-The task is to design an ML system capable of recommending the optimal daily price.
-
-3. Approach & Methodology
-3.1 Data Pipeline
-
-The following steps were implemented:
-
-Data ingestion from historical CSV
-
-Data validation & cleaning
-
-Outlier handling
-
-Feature engineering:
+🏗 Feature engineering including:
 
 margin per liter
 
 competitor average price
 
-price differential vs competitors
+price differential
 
-lagged volume features
+lag features (previous volume, price)
 
-moving-average demand indicators
+moving-average indicators
 
-Processed dataset persisted for model training
+Processed dataset was persisted for reproducible training.
 
-3.2 Machine Learning Model
+🤖 3.2 Machine Learning Model
 
-A Random Forest Regression model was trained to predict daily fuel volume.
+Algorithm used: Random Forest Regression
 
-Rationale:
+Target variable: daily fuel volume
 
-captures nonlinear price–demand relationships
+Why Random Forest?
 
-robust against noise/outliers
+handles nonlinear relationships
 
-minimal assumptions on functional form
+robust to noise/outliers
 
-3.3 Price Optimization Strategy
+performs well with tabular business data
 
-For each day:
+💹 3.3 Price Optimization Strategy
 
-generate a grid of candidate prices
+Steps performed per day:
 
-predict demand using trained model
+generate a grid of possible prices
+predict demand for each price
+compute expected profit
+apply business constraints
+return price with maximum profit
 
-calculate expected profit
+Business Constraints Applied:
 
-enforce business constraints
+⛔ maximum price change per day
 
-recommend price with maximum profit
+💸 price ≥ cost (no negative margin)
 
-Business Constraints Applied
+⚖️ competitive alignment (price not far above competitors)
 
-maximum price change limit per day
+✔️ eliminate economically infeasible price points
 
-price ≥ cost
-
-price not significantly higher than competitors
-
-negative-margin avoidance
-
-4. Dataset
+🗂️ 4. Dataset Description
 
 File: oil_retail_history.csv
 
-Contains approximately two years of daily data:
+Includes ~2 years of daily records:
 
 date
+company retail price
+cost per liter
+competitor 1/2/3 prices
+sales volume (liters)
 
-company price
-
-cost
-
-competitor prices (3 stations)
-
-daily sales volume
-
-5. Model Performance
+📊 5. Model Performance
 Metric	Result
 RMSE	883.05
 R² Score	0.044
 
-Notes:
+📌 Interpretation:
 
-demand is inherently noisy
+retail fuel demand is naturally noisy
+despite noise, the model captures:
+price sensitivity
+competitor influence
+seasonal demand patterns
 
-results are consistent with real-world retail fuel dynamics
+🧮 6. Example System Output
 
-model successfully captures competitive and price-elastic effects
+Input includes:
 
-6. System Output Example
-
-Input:
-
-current cost
-
-previous company price
-
+today’s cost
+yesterday’s price
 competitor prices
 
-Output:
+Model Output:
 
-recommended price
+✅ Recommended Price: ₹96.45
 
-expected demand
+🛢 Expected Demand: 13,450 liters
 
-expected profit
+💰 Expected Profit: ₹143,651.98
 
-Example result from the model:
+📦 7. Repository Contents
+app.py                     → Streamlit web application
+fuel_price_model.pkl       → Trained ML model (pickle)
+notebook.ipynb             → Training & pipeline notebook
+oil_retail_history.csv     → Historical dataset
+today_example.json         → Sample input file
+requirements.txt           → Project dependencies
+README.md                  → Project documentation
 
-Recommended Price: ₹96.45
+🚀 8. How to Run
+▶️ Option A — Hosted Web App
 
-Expected Demand: 13,450 liters
+👉 https://fuel-price-optimization-ml-qse9txe2exsvy2a6v4knxu.streamlit.app/
 
-Expected Profit: ₹143,651.98
-
-7. Repository Contents
-app.py                     Streamlit application
-fuel_price_model.pkl       Trained ML model
-notebook.ipynb             Model training & pipeline notebook
-oil_retail_history.csv     Historical dataset
-today_example.json         Example daily input
-requirements.txt           Dependencies
-README.md                  Project documentation
-
-8. How to Run
-Option A — Launch web app (hosted)
-
-https://fuel-price-optimization-ml-qse9txe2exsvy2a6v4knxu.streamlit.app/
-
-Option B — Run locally
+💻 Option B — Run Locally
 git clone <repository-link>
 cd fuel-price-optimization-ml
 pip install -r requirements.txt
 streamlit run app.py
 
-9. Technology Stack
+🛠️ 9. Technology Stack
 
 Python
-
 Pandas / NumPy
-
 Scikit-Learn
-
 Random Forest
-
 Streamlit
-
 Pickle
-
 Google Colab
 
-11. Author
+Author
 
 Tejal Wankhade
+AI & Machine Learning Practitioner
+
